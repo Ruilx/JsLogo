@@ -2,6 +2,7 @@
 #define DISWIDGET_H
 
 #include <QtWidgets>
+#include <QVector2D>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
@@ -24,6 +25,7 @@ class DisWidget : public QWidget
 	}
 
 	bool penDown = false;
+
 
 public:
 	explicit DisWidget(QWidget *parent = 0) : QWidget(parent){
