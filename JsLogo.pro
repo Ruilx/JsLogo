@@ -8,7 +8,7 @@ QT       += core gui qml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = QJSEngineDemo
+TARGET = JsLogo
 TEMPLATE = app
 
 
