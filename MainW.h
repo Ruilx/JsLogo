@@ -49,6 +49,7 @@ public:
 		QJSValue displayJsObject = js->newQObject(this->display);
 		js->globalObject().setProperty("turtle", displayJsObject);
 
+
 		this->connect(this->act, &QAction::triggered, [this](bool){
 			this->runEdit->clear();
 			try{
