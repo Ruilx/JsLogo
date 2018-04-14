@@ -15,21 +15,21 @@ QPolarF toPolarF(const QPoint &point){
 
 QPointF toPointF(const QPolarF &polar){
 	qreal cosT = qCos(polar.theta);
-	if(qAbs(cosT) < 0.00001f){
-		cosT = qreal(0.0f);
-	}else if(cosT > 0 && ((1.0f - cosT) < 0.00001f)){
-		cosT = qreal(1.0f);
-	}else if(cosT < 0 && ((1.0f + cosT) < 0.00001f)){
-		cosT = qreal(-1.0f);
-	}
+//	if(qAbs(cosT) < 0.00001f){
+//		cosT = qreal(0.0f);
+//	}else if(cosT > 0 && ((1.0f - cosT) < 0.00001f)){
+//		cosT = qreal(1.0f);
+//	}else if(cosT < 0 && ((1.0f + cosT) < 0.00001f)){
+//		cosT = qreal(-1.0f);
+//	}
 	qreal sinT = qSin(polar.theta);
-	if(qAbs(sinT) < 0.00001f){
-		sinT = qreal(0.0f);
-	}else if(sinT > 0 && ((1.0f - sinT) < 0.00001f)){
-		sinT = qreal(1.0f);
-	}else if(sinT < 0 && ((1.0f + sinT) < 0.00001f)){
-		sinT = qreal(-1.0f);
-	}
+//	if(qAbs(sinT) < 0.00001f){
+//		sinT = qreal(0.0f);
+//	}else if(sinT > 0 && ((1.0f - sinT) < 0.00001f)){
+//		sinT = qreal(1.0f);
+//	}else if(sinT < 0 && ((1.0f + sinT) < 0.00001f)){
+//		sinT = qreal(-1.0f);
+//	}
 	return QPointF(polar.rho * cosT, polar.rho * sinT);
 }
 

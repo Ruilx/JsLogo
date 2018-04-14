@@ -24,17 +24,17 @@ class DisWidget : public QWidget
 		return this->adjustToLeftTop(centerPoint, QSizeF(this->turtlePixmap.size()));
 	}
 	QPointF turtlePos(){
-		qDebug() << (this->turtle->pos() + QPointF(this->turtlePixmap.width() / 2.0f, this->turtlePixmap.height() / 2.0f));
+//		qDebug() << (this->turtle->pos() + QPointF(this->turtlePixmap.width() / 2.0f, this->turtlePixmap.height() / 2.0f));
 		return this->turtle->pos() + QPointF(this->turtlePixmap.width() / 2.0f, this->turtlePixmap.height() / 2.0f);
 	}
 	void debugTurtlePos(){
-		qDebug() << "Current Turtle:" << this->turtlePos();
+//		qDebug() << "Current Turtle:" << this->turtlePos();
 	}
 	void debugTurtleRolation(){
-		qDebug() << "Current Turtle Angle:" << this->turtle->rotation();
+//		qDebug() << "Current Turtle Angle:" << this->turtle->rotation();
 	}
 	QPointF setTurtlePos(const QPointF &location){
-		qDebug() << __FUNCTION__ << "location:" << location;
+//		qDebug() << __FUNCTION__ << "location:" << location;
 		this->turtle->setPos(this->adjustToLeftTop(location));
 		this->backupLoc();
 		debugTurtlePos();
@@ -42,7 +42,7 @@ class DisWidget : public QWidget
 		return this->turtlePos();
 	}
 	QPointF moveTurtlePos(const QPointF &vector){
-		qDebug() << __FUNCTION__ << "move vector:" << vector;
+//		qDebug() << __FUNCTION__ << "move vector:" << vector;
 		this->turtle->setPos(this->adjustToLeftTop(this->turtlePos() + vector));
 		this->backupLoc();
 		debugTurtlePos();
@@ -50,7 +50,7 @@ class DisWidget : public QWidget
 		return this->turtlePos();
 	}
 	QPointF moveTurtlePos(const QPolarF &polar){
-		qDebug() << __FUNCTION__ << "move polar:" << "(" << polar.rho << "," << polar.theta << ")";
+//		qDebug() << __FUNCTION__ << "move polar:" << "(" << polar.rho << "," << polar.theta << ")";
 		this->turtle->setPos(this->adjustToLeftTop(this->turtlePos() + toPointF(polar)));
 		this->backupLoc();
 		debugTurtlePos();
@@ -58,7 +58,7 @@ class DisWidget : public QWidget
 		return this->turtlePos();
 	}
 	QPointF moveTutleAngle(qreal deg){
-		qDebug() << __FUNCTION__ << "move angle:" << deg;
+//		qDebug() << __FUNCTION__ << "move angle:" << deg;
 		this->currentDegree = normDeg(this->currentDegree + deg);
 		this->turtle->setRotation(this->currentDegree - 270.0f);
 		debugTurtleRolation();
@@ -66,7 +66,7 @@ class DisWidget : public QWidget
 	}
 	QPointF setTutleAngle(qreal deg){
 		deg = deg + 270.0f;
-		qDebug() << __FUNCTION__ << "set angle:" << deg;
+//		qDebug() << __FUNCTION__ << "set angle:" << deg;
 		this->currentDegree = normDeg(deg);
 		this->turtle->setRotation(this->currentDegree - 270.0f);
 		debugTurtleRolation();
@@ -82,7 +82,7 @@ class DisWidget : public QWidget
 	qreal currentDegree = 270.0f;
 
 	inline void backupLoc(){
-		qDebug() << "BackupLoc: Using:" << this->newPoint << "replace to OLD:" << this->oldPoint;
+//		qDebug() << "BackupLoc: Using:" << this->newPoint << "replace to OLD:" << this->oldPoint;
 		this->oldPoint = this->newPoint;
 		this->newPoint = this->turtlePos();
 	}
@@ -166,7 +166,7 @@ public:
 		this->turtle->setPixmap(this->turtlePixmap);
 		this->turtle->setTransformOriginPoint(this->turtlePixmap.width() / 2.0f, this->turtlePixmap.height() / 2.0f);
 		this->turtle->setPos(-this->turtlePixmap.width() / 2.0f, -this->turtlePixmap.height() / 2.0f);
-		qDebug() << "this->turtle.pos()" << this->turtle->pos();
+//		qDebug() << "this->turtle.pos()" << this->turtle->pos();
 		this->turtle->setTransformationMode(Qt::SmoothTransformation);
 		//this->polygon->setPos(0, 0);
 
@@ -329,7 +329,12 @@ public:
 	}
 
 	Q_INVOKABLE int doRandom(int maxNum){
+#if QT_VERSION >= 0x060000
 		return (QRandomGenerator::global()->generate() % maxNum) + 1;
+#else
+		qsrand((uint)QDateTime::currentMSecsSinceEpoch());
+		return (qrand() % maxNum + 1);
+#endif
 	}
 
 	Q_INVOKABLE int doRemainder(int first, int second){
