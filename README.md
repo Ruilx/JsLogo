@@ -1,11 +1,11 @@
 # JsLogo
------
+
 <sup>(A project using JavaScript does Logo language's do)</sup>
 
-####Using Qt builtin Google V8 JavaScript-Engine as a flexible script using in C++
+Using Qt builtin Google V8 JavaScript-Engine as a flexible script using in C++
 
 <sup>(A demo to test the [@RPGV2](https://github.com/Ruilx/RPGV2)'s scenarist executing script)</sup>
-
+-----
 ##JSLogo's common snapshot
 ![running_image](data/img/running.png)
 
