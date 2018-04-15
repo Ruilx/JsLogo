@@ -1,3 +1,4 @@
+
 #ifndef DISWIDGET_H
 #define DISWIDGET_H
 
@@ -181,61 +182,63 @@ public:
 		});
 	}
 
-	Q_INVOKABLE bool doForward(qreal length){
+	bool doForward(qreal length){
 		return this->moveTurtlePos(QPolarF(length, deg2Rad(this->currentDegree))).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doBackward(qreal length){
+	bool doBackward(qreal length){
 		return this->moveTurtlePos(QPolarF(-length, deg2Rad(this->currentDegree))).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doClear(){
+	bool doClear(){
 		for(QGraphicsItem *i: this->scene->items()){
 			if(i && i != this->turtle){
 				this->scene->removeItem(i);
 				delete i;
 			}
 		}
+		this->doPenUp();
 		this->setTurtlePos(QPoint(0.0f, 0.0f));
 		this->setTutleAngle(0);
+		this->doPenDown();
 		return this->setTurtlePos(QPointF(0, 0)).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doHideTurtle(){
+	bool doHideTurtle(){
 		this->setTurtleVisible(false);
 		return true;
 	}
 
-	Q_INVOKABLE bool doShowTurtle(){
+	bool doShowTurtle(){
 		this->setTurtleVisible(true);
 		return true;
 	}
 
-	Q_INVOKABLE bool doHome(){
+	bool doHome(){
 		this->setTurtlePos(QPointF(0.0f, 0.0f));
 		this->setTutleAngle(0.0f);
 		return true;
 	}
 
-	Q_INVOKABLE bool doLeft(qreal deg){
+	bool doLeft(qreal deg){
 		return this->moveTutleAngle(-deg).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doRight(qreal deg){
+	bool doRight(qreal deg){
 		return this->moveTutleAngle(deg).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doPenUp(){
+	bool doPenUp(){
 		this->penDown = false;
 		return true;
 	}
 
-	Q_INVOKABLE bool doPenDown(){
+	bool doPenDown(){
 		this->penDown = true;
 		return true;
 	}
 
-	Q_INVOKABLE bool doSetBackground(int value){
+	bool doSetBackground(int value){
 		QColor color = this->stdColor(value);
 		if(!color.isValid()){
 			return false;
@@ -244,23 +247,23 @@ public:
 		return true;
 	}
 
-	Q_INVOKABLE bool doSetHead(qreal angle){
+	bool doSetHead(qreal angle){
 		return this->setTutleAngle(angle).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doSetX(qreal x){
+	bool doSetX(qreal x){
 		return this->setTurtlePos(QPointF(x, this->turtlePos().y())).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doSetY(qreal y){
+	bool doSetY(qreal y){
 		return this->setTurtlePos(QPointF(this->turtlePos().x(), y)).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doSetXY(qreal x, qreal y){
+	bool doSetXY(qreal x, qreal y){
 		return this->setTurtlePos(QPointF(x, y)).isNull() ? false : true;
 	}
 
-	Q_INVOKABLE bool doSetPenColor(int value){
+	bool doSetPenColor(int value){
 		QColor color = this->stdColor(value);
 		if(!color.isValid()){
 			return false;
@@ -269,58 +272,58 @@ public:
 		return true;
 	}
 
-	Q_INVOKABLE bool doSetSpeed(int speed){
+	bool doSetSpeed(int speed){
 		if(speed > 100 || speed < 1){
 			return false;
 		}
 		return true;
 	}
 
-	Q_INVOKABLE bool doSetWidth(int width){
+	bool doSetWidth(int width){
 		this->currentPen.setWidth(width);
 		return true;
 	}
 
-	Q_INVOKABLE qreal doAbs(qreal num){
+	qreal doAbs(qreal num){
 		return qAbs(num);
 	}
 
-	Q_INVOKABLE qreal doSin(qreal num){ // deg
+	qreal doSin(qreal num){ // deg
 		return qSin(deg2Rad(num));
 	}
 
-	Q_INVOKABLE qreal doCos(qreal num){ // deg
+	qreal doCos(qreal num){ // deg
 		return qCos(deg2Rad(num));
 	}
 
-	Q_INVOKABLE qreal doTan(qreal num){ // deg
+	qreal doTan(qreal num){ // deg
 		return qTan(deg2Rad(num));
 	}
 
-	Q_INVOKABLE qreal doArcSin(qreal num){ // deg
+	qreal doArcSin(qreal num){ // deg
 		return rad2Deg(qAsin(num));
 	}
 
-	Q_INVOKABLE qreal doArcCos(qreal num){ // deg
+	qreal doArcCos(qreal num){ // deg
 		return rad2Deg(qAcos(num));
 	}
 
-	Q_INVOKABLE qreal doArcTan(qreal num){ // deg
+	qreal doArcTan(qreal num){ // deg
 		return rad2Deg(qAtan(num));
 	}
 
-	Q_INVOKABLE qreal doExpn(int num){
+	qreal doExpn(int num){
 		return qPow(M_E, num);
 	}
 
-	Q_INVOKABLE qreal doLog(qreal n){
+	qreal doLog(qreal n){
 		if(n < 0){
 			return false;
 		}
 		return log(n);
 	}
 
-	Q_INVOKABLE qreal doLog10(qreal n){
+	qreal doLog10(qreal n){
 		if(n < 0){
 			return 0.0f;
 		}
@@ -328,7 +331,7 @@ public:
 
 	}
 
-	Q_INVOKABLE int doRandom(int maxNum){
+	int doRandom(int maxNum){
 #if QT_VERSION >= 0x060000
 		return (QRandomGenerator::global()->generate() % maxNum) + 1;
 #else
@@ -337,41 +340,45 @@ public:
 #endif
 	}
 
-	Q_INVOKABLE int doRemainder(int first, int second){
+	int doRemainder(int first, int second){
 		return first % second;
 	}
 
-	Q_INVOKABLE int doRound(qreal num){
+	int doInt(qreal num){
+		return int(num);
+	}
+
+	int doRound(qreal num){
 		return qRound(num);
 	}
 
-	Q_INVOKABLE qreal doSqrt(qreal num){
+	qreal doSqrt(qreal num){
 		if(num < 0){
 			return 0.0f;
 		}
 		return qSqrt(num);
 	}
 
-	Q_INVOKABLE qreal doXCor(){
+	qreal doXCor(){
 		return this->turtlePos().x();
 	}
 
-	Q_INVOKABLE qreal doYCor(){
+	qreal doYCor(){
 		return this->turtlePos().y();
 	}
 
-	Q_INVOKABLE bool doDot(qreal x, qreal y){
+	bool doDot(qreal x, qreal y){
 		QGraphicsLineItem *i = new QGraphicsLineItem(QLineF(x, y, x, y), nullptr);
 		i->setPen(this->currentPen);
 		this->scene->addItem(i);
 		return true;
 	}
 
-	Q_INVOKABLE qreal doHeading(){
+	qreal doHeading(){
 		return this->turtle->rotation();
 	}
 
-	Q_INVOKABLE bool doDraw(){
+	bool doDraw(){
 		this->doClear();
 		this->setTurtlePos(QPointF(0.0f, 0.0f));
 		this->setTurtleVisible(true);

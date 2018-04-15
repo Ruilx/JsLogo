@@ -5,6 +5,7 @@
 #include <QJSEngine>
 
 #include "DisWidget.h"
+#include "TurtleHelper.h"
 
 class MainW : public QMainWindow
 {
@@ -20,6 +21,7 @@ class MainW : public QMainWindow
 	QAction *act = new QAction("execute", this);
 
 	QJSEngine *js = new QJSEngine(this);
+	TurtleHelper *helper = new TurtleHelper(this->display, this);
 
 public:
 	MainW(QWidget *parent = 0) : QMainWindow(parent){
@@ -39,15 +41,15 @@ public:
 
 		this->menuBar()->addAction(this->act);
 
-		this->js->installExtensions(QJSEngine::AllExtensions);
+//		this->js->installExtensions(QJSEngine::AllExtensions);
 
-		QJSValue codeEditJsObject = js->newQObject(this->codeEdit);
-		QJSValue runEditJsObject = js->newQObject(this->runEdit);
-		js->globalObject().setProperty("codeEdit", codeEditJsObject);
-		js->globalObject().setProperty("runEdit", runEditJsObject);
+//		QJSValue codeEditJsObject = js->newQObject(this->codeEdit);
+//		QJSValue runEditJsObject = js->newQObject(this->runEdit);
+//		js->globalObject().setProperty("codeEdit", codeEditJsObject);
+//		js->globalObject().setProperty("runEdit", runEditJsObject);
 
-		QJSValue displayJsObject = js->newQObject(this->display);
-		js->globalObject().setProperty("turtle", displayJsObject);
+		QJSValue turtleObject = js->newQObject(this->helper);
+		js->globalObject().setProperty("turtle", turtleObject);
 
 
 		this->connect(this->act, &QAction::triggered, [this](bool){
