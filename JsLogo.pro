@@ -30,3 +30,15 @@ RESOURCES += \
 
 OTHER_FILES += \
 	README.md
+
+DISTFILES += \
+    data/img/complex.png \
+    data/img/complex2.png \
+    data/img/complex3.png \
+    data/img/coord.png \
+    data/img/draw.png \
+    data/img/forward.png \
+    data/img/pen.png \
+    data/img/running.png \
+    data/img/turn.png \
+    data/img/visible.png

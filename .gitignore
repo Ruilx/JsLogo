@@ -34,6 +34,8 @@ Thumbs.db
 *.rc
 /.qmake.cache
 /.qmake.stash
+debug/
+release/
 
 # qtcreator generated files
 *.pro.user*
@@ -43,6 +45,7 @@ Thumbs.db
 
 # Vim temporary files
 .*.swp
+*.bak
 
 # Visual Studio generated files
 *.ib_pdb_index

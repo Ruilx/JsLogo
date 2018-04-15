@@ -31,6 +31,17 @@ public:
 		this->splitter->setCollapsible(1, false);
 		this->runEdit->setReadOnly(true);
 
+		QFont font = QFont("courier new", 9);{
+			this->codeEdit->setFont(font);
+			this->runEdit->setFont(font);
+		}
+
+		this->codeEdit->setEnabled(false);
+		this->runEdit->setEnabled(false);
+
+		QFontMetrics fontW(this->codeEdit->font());
+		this->codeEdit->setTabStopDistance(fontW.maxWidth() * 4);
+
 		this->splitterMain->addWidget(this->display);
 		this->splitterMain->addWidget(this->splitter);
 		this->splitterMain->setCollapsible(0, false);
@@ -65,6 +76,11 @@ public:
 					this->runEdit->insertPlainText(tr("Uncaught exception at line %1 : %2").arg(value.property("lineNumber").toInt()).arg(value.toString()));
 				}
 			}
+		});
+
+		this->connect(this->display, &DisWidget::readySignal, [this](){
+			this->codeEdit->setEnabled(true);
+			this->runEdit->setEnabled(true);
 		});
 
 	}

@@ -176,9 +176,13 @@ public:
 		//this->scene->addLine(-1000, 0, 1000, 0, QPen(QColor(Qt::blue)));
 		//this->scene->addLine(0, -1000, 0, 1000, QPen(QColor(Qt::blue)));
 
+		this->view->setEnabled(false);
+
 		QTimer::singleShot(1000, [this](){
 			this->scene->setSceneRect((-this->view->width() / 2.0f), (-this->view->height() / 2.0f), this->view->width() -2, this->view->height() -2);
 			this->scene->addItem(this->turtle);
+			this->view->setEnabled(true);
+			emit this->readySignal();
 		});
 	}
 
@@ -390,7 +394,7 @@ public:
 	}
 
 signals:
-
+	void readySignal();
 public slots:
 };
 
