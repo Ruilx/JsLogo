@@ -6,10 +6,10 @@ Using Qt builtin Google V8 JavaScript-Engine as a flexible script using in C++
 
 <sup>(A demo to test the [@RPGV2](https://github.com/Ruilx/RPGV2)'s scenarist executing script)</sup>
 
-##JSLogo's common snapshot
+## JSLogo's common snapshot
 ![running_image](data/img/running.png)
 
-##Installation
+## Installation
 This project is based on QtSDK version 5.10, and you can compile the project using any version of Qt5 environment.
 
 To download this project, please using:
@@ -26,7 +26,7 @@ and finally 'make'(or with MinGW make 'mingw32-make') the project.
 	make -f Makefile.Release
 ```
 
-##JsLogo's Functions
+## JsLogo's Functions
 Using JavaScript to control a "turtle" to draw shapes, and command like [@Logo-language](https://en.wikipedia.org/wiki/Logo_%28programming_language%29).
 
 The code had already built a JS object "turtle" to do the logo command.
@@ -55,7 +55,7 @@ The code had already built a JS object "turtle" to do the logo command.
 	* Randoms
 * Other functions
 
-##What the turtle does
+## What the turtle does
 Using object "turtle" can send the command to turtle on the screen
 
 * Forward and backward
@@ -120,7 +120,7 @@ Because JavaScript has cyclic programming, the REPEAT command will replace by "f
 ![complex_image](data/img/complex2.png)
 ![complex_image](data/img/complex3.png)
 
-##Issues
+## Issues
 I am grateful you to setup a issue or make a pull request if you found any issues in the project, and if you appreciate this project, please lightup a star on the right top of the page~
 
 Much Thanks~
