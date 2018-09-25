@@ -123,4 +123,4 @@ Because JavaScript has cyclic programming, the REPEAT command will replace by "f
 ## Issues
 I am grateful you to setup a issue or make a pull request if you found any issues in the project, and if you appreciate this project, please lightup a star on the right top of the page~
 
-Much Thanks~
+Many Thanks for your star~
